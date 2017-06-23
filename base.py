@@ -5,5 +5,6 @@ db = Database()
 qslist = db.List()
 search = "How"
 for title in qslist:
-    if(search in title["title"]):
-        print (title["content"])
+    print (title["content"])
+    print((title["answer"]))
+    break

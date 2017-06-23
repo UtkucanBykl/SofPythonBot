@@ -4,8 +4,8 @@ class Database():
 
     def __init__(self):
         self.__client = MongoClient("localhost", 27017)
-        self.__db = self.__client["webcrawlerr"]
-        self.__collection = self.__db["webcrawlerrcollection"]
+        self.__db = self.__client["crawlerr"]
+        self.__collection = self.__db["crawlerrcollection"]
 
     def Insert(self, question):
         if (self.__collection.find_one({"title":question["title"]})):

@@ -16,23 +16,21 @@ while(True):
     sauce = urllib2.urlopen(URL).read()
     soup = bs.BeautifulSoup(sauce, "lxml")
     for div in soup.find_all('div', attrs={'class' : "question-summary"}):
-        if("..." in div.find('div', class_="excerpt").text):
-            URL = baseurl+div.find('a')["href"]
-            saucee = urllib2.urlopen(URL).read()
-            soupp = bs.BeautifulSoup(saucee, "lxml")
-            content =soupp.find("div", class_="post-text").text
-            print(content)
-        else:
-            content = div.find('div', class_="excerpt").text
+        URLL = baseurl+div.find('a')["href"]
+        saucee = urllib2.urlopen(URLL).read()
+        soupp = bs.BeautifulSoup(saucee, "lxml")
+        content =soupp.find("div", class_="post-text").text
+        answer = soupp.find("td", class_="answercell").find("div", class_="post-text").text
 
         question = {
         "views" : div.find('div', class_="views").text,
         "status" : div.find('div', class_="status").text,
         "title" : div.find('a').text,
-        "href" : baseurl+div.find('a')["href"],
+        "href" : URLL,
         "content" : content,
-        "insertdate" : datetime.now().strftime("%d-%m-%y-%H-%M")
-
+        "insertdate" : datetime.now().strftime("%d-%m-%y-%H-%M"),
+        "answer":answer
         }
+
         db.Insert(question)
     page = page + 1
