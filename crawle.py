@@ -20,7 +20,9 @@ while(True):
         saucee = urllib2.urlopen(URLL).read()
         soupp = bs.BeautifulSoup(saucee, "lxml")
         content =soupp.find("div", class_="post-text").text
-        answer = soupp.find("td", class_="answercell").find("div", class_="post-text").text
+        for td in soupp.find_all("td", class_="answercell"):
+            answer = td.text
+            break
 
         question = {
         "views" : div.find('div', class_="views").text,
