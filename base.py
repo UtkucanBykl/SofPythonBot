@@ -3,6 +3,7 @@ from database import Database
 db = Database()
 
 qslist = db.List()
-search = "How"
-print(qslist[0]["title"])
-print(qslist[0]["answer"])
+search = "What does the “yield” keyword do in Python?"
+for question in qslist:
+    if question["title"] == search:
+        print(question["answer"])
