@@ -5,7 +5,7 @@ import datetime
 from base import MachineLearning
 from telegram.ext import Updater,CommandHandler,MessageHandler,Filters
 from database import Database
-Token = "427587400:AAF8Y2QRBYcvbtbvC26yhukXE3U7W4G3ZMw"
+Token = ""
 updater = Updater(token=Token)
 dispatcher = updater.dispatcher
 logging.basicConfig(filename="sato.log",level=logging.INFO)
