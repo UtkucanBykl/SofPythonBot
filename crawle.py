@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from imp import reload
+
 import urllib2, sys
 import bs4 as bs
 from datetime import datetime
@@ -20,22 +22,22 @@ while(True):
         saucee = urllib2.urlopen(URLL).read()
         soupp = bs.BeautifulSoup(saucee, "lxml")
         content =soupp.find("div", class_="post-text").text
-        title = div.find("a").text
-        for div in soupp.find_all("div", class_="post-text"):
-            for k in range(2):
-                post_text.append(div.text)
+        answer1 = soupp.find("td", class_="answercell")
+        answer =answer1.find("div" , class_ ="post-text").text
+        print(answer)
 
-            question = {
+        title = div.find("a").text
+
+        question = {
         "title" : title,
         "href" : URLL,
-        "content" : post_text[0],
+        "content" : content,
         "insertdate" : datetime.now().strftime("%d-%m-%y-%H-%M"),
-        "answer":post_text[1]
+        "answer":answer
         }
-            db.Insert(question)
-            print(question)
-            post_text.remove(post_text[0])
-            post_text.remove(post_text[0])
+        db.Insert(question)
+        print(question)
+
 
         with open("deneme.txt", "a") as f:
             f.write(title+"\n")
